@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Input } from "../../components/Input";
+import { Button } from "../../components/Button";
 
 export function Login() {
   return (
@@ -29,7 +30,7 @@ export function Login() {
           name="password"
         />
 
-        <button type="submit" className="mt-2">Entrar</button>
+        <Button type="submit" className="mt-2">Entrar</Button>
       </form>
     </div>
   );
