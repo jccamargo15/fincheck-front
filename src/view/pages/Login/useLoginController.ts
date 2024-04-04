@@ -1,6 +1,12 @@
 import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
-type FormData = { email: string, password: string };
+const schema = z.object({
+  email: z.string().nonempty('E-mail é obrigatório').email('Informe um e-mail válido'),
+  password: z.string().nonempty('Senha é obrigatória').min(8, 'Senha deve conter pelo menos 8 caracteres'),
+});
+
+type FormData = z.infer<typeof schema>;
 
 export function useLoginController() {
   const {
@@ -9,7 +15,7 @@ export function useLoginController() {
   } = useForm<FormData>();
 
   const handleSubmit = hookFormHandleSubmit((data) => {
-    console.log({ data });
+    schema.parse(data);
   });
 
   return { handleSubmit, register };
