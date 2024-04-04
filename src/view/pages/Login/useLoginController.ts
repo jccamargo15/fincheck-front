@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
 const schema = z.object({
@@ -12,11 +13,15 @@ export function useLoginController() {
   const {
     register,
     handleSubmit: hookFormHandleSubmit,
-  } = useForm<FormData>();
-
-  const handleSubmit = hookFormHandleSubmit((data) => {
-    schema.parse(data);
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
   });
 
-  return { handleSubmit, register };
+  const handleSubmit = hookFormHandleSubmit((data) => {
+    // Presumir que os dados estão válidos
+    console.log('Chama a api com: ', data);
+  });
+
+  return { handleSubmit, register, errors };
 }
