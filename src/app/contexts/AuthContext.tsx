@@ -2,7 +2,6 @@ import { createContext, useCallback, useState } from "react";
 import { localStorageKeys } from "../config/localStorageKeys";
 import { useQuery } from "@tanstack/react-query";
 import { usersService } from "../services/usersService";
-import { httpClient } from "../services/httpClient";
 
 interface AuthContextValue {
   signedIn: boolean;
@@ -26,7 +25,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signin = useCallback((accessToken: string) => {
     localStorage.setItem(localStorageKeys.ACCESS_TOKEN, accessToken);
-    httpClient.defaults.headers.Authorization = `Bearer ${accessToken}`;
 
     setSignedIn(true);
   }, []);
