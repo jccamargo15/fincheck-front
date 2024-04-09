@@ -51,10 +51,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, [isError, signout]);
 
-  if (isFetching) {
-    return <LaunchScreen />;
-  }
-
   return (
     <AuthContext.Provider
       value={{
@@ -64,7 +60,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }}
     >
       <h1>{data?.email}</h1>
-      {children}
+      <LaunchScreen isLoading={isFetching} />
+
+      {!isFetching && children}
     </AuthContext.Provider>
   );
 }
