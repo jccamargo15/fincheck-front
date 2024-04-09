@@ -3,7 +3,7 @@ import { localStorageKeys } from "../config/localStorageKeys";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { usersService } from "../services/usersService";
 import toast from "react-hot-toast";
-import { PageLoader } from "../../view/components/PageLoader";
+import { LaunchScreen } from "../../view/components/LaunchScreen";
 
 interface AuthContextValue {
   signedIn: boolean;
@@ -42,7 +42,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     });
 
     setSignedIn(false);
-  }, []);
+  }, [queryClient]);
 
   useEffect(() => {
     if (isError) {
@@ -52,7 +52,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [isError, signout]);
 
   if (isFetching) {
-    return <PageLoader />;
+    return <LaunchScreen />;
   }
 
   return (
