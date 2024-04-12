@@ -1,5 +1,6 @@
 import { ChevronLeftIcon } from "@radix-ui/react-icons";
 import { EyeIcon } from "../../../components/icons/EyeIcon";
+import { AccountCard } from "./AccountCard";
 
 export function Accounts() {
   return (
@@ -39,7 +40,9 @@ export function Accounts() {
           </div>
         </div>
 
-        <div>Contas</div>
+        <div className="mt-4">
+          <AccountCard />
+        </div>
       </div>
     </div>
   );
