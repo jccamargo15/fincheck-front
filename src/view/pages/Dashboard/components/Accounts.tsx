@@ -41,7 +41,24 @@ export function Accounts() {
         </div>
 
         <div className="mt-4">
-          <AccountCard />
+          <AccountCard
+            color="#7950F2"
+            name="Nubank"
+            balance={1000.23}
+            type="CHECKING"
+          />
+          <AccountCard
+            color="#333"
+            name="XP"
+            balance={1000.23}
+            type="INVESTMENT"
+          />
+          <AccountCard
+            color="#0f0"
+            name="Carteira"
+            balance={1000.23}
+            type="CASH"
+          />
         </div>
       </div>
     </div>

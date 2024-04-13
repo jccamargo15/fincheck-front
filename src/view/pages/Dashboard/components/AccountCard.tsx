@@ -1,21 +1,30 @@
+import { formatCurrency } from "../../../../app/utils/formatCurrency";
+import { BankAccountTypeIcon } from "../../../components/icons/BankAccountTypeIcon";
 import { CategoryIcon } from "../../../components/icons/categories/CategoryIcon";
 
-export function AccountCard() {
+interface AccountCardProps {
+  color: string;
+  name: string;
+  balance: number;
+  type: 'CASH' | 'CHECKING' | 'INVESTMENT';
+}
+
+export function AccountCard({ color, name, balance, type }: AccountCardProps) {
   return (
     <div
       className="p-4 bg-white rounded-2xl h-[200px] flex flex-col justify-between border-b-4 border-teal-950"
-      style={{ borderColor: "#7950F2" }}
+      style={{ borderColor: color }}
     >
       <div>
-        <CategoryIcon type="income" />
+        <BankAccountTypeIcon type={type} />
         <span className="text-gray-800 font-medium tracking-[-0.5px] mt-4 block">
-          Nubank
+          {name}
         </span>
       </div>
 
       <div>
         <span className="text-gray-800 font-medium tracking-[-0.5px] block">
-          R$ 123,00
+          {formatCurrency(balance)}
         </span>
         <small className="text-gray-600 text-sm">Saldo atual</small>
       </div>
