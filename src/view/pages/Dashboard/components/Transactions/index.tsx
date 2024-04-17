@@ -10,7 +10,7 @@ import { CategoryIcon } from "../../../../components/icons/categories/CategoryIc
 
 export function Transactions() {
   return (
-    <div className="bg-gray-100 rounded-2xl w-full h-full px-4 py-8 md:p-10">
+    <div className="bg-gray-100 rounded-2xl w-full h-full px-4 py-8 md:p-10 flex flex-col">
       <header>
         <div className="flex items-center justify-between">
           <button className="flex items-center gap-2">
@@ -46,7 +46,7 @@ export function Transactions() {
         </div>
       </header>
 
-      <div className="mt-4 space-y-2">
+      <div className="mt-4 space-y-2 flex-1 overflow-y-auto">
         <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
           <div className="flex-1 flex items-center gap-3">
             <CategoryIcon type="expense" />
