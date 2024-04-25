@@ -27,7 +27,9 @@ export function Dashboard() {
 
         <Fab />
 
-        <Modal />
+        <Modal open title="Receitas">
+          Conteúdo
+        </Modal>
       </div>
     </DashboardProvider>
   );
