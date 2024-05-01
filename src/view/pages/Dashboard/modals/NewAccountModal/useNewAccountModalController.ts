@@ -6,8 +6,11 @@ export function useNewAccountModalController() {
     closeNewAccountModal
   } = useDashboard();
 
+  const isLoading = false;
+
   return {
     isNewAccountModalOpen,
-    closeNewAccountModal
+    closeNewAccountModal,
+    isLoading
   }
 }

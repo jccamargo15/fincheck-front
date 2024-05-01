@@ -4,24 +4,29 @@ import { Input } from "../../../../components/Input";
 import { InputCurrency } from "../../../../components/InputCurrency";
 import { Modal } from "../../../../components/Modal";
 import { Select } from "../../../../components/Select";
-import { useNewAccountModalController } from "./useNewAccountModalController";
+import { useNewTransactionModalController } from "./useNewTransactionModalController";
 
-export function NewAccountModal() {
+export function NewTransactionModal() {
   const {
-    isNewAccountModalOpen,
-    closeNewAccountModal,
+    isNewTransactionModalOpen,
+    closeNewTransactionModal,
+    newTransactionType,
     isLoading,
-  } = useNewAccountModalController();
+  } = useNewTransactionModalController();
+
+  const isExpense = newTransactionType === 'EXPENSE';
 
   return (
     <Modal
-      title="Nova Conta"
-      open={isNewAccountModalOpen}
-      onClose={closeNewAccountModal}
+      title={isExpense ? 'Nova Despesa' : 'Nova Receita'}
+      open={isNewTransactionModalOpen}
+      onClose={closeNewTransactionModal}
     >
       <form>
         <div>
-          <span className="text-gray-600 text-xs tracking-[-0.5px]">Saldo</span>
+          <span className="text-gray-600 text-xs tracking-[-0.5px]">
+            Valor {isExpense ? 'da Despesa' : 'da Receita'}
+          </span>
 
           <div className="flex items-center gap-2">
             <span className="text-gray-600 text-lg tracking-[-0.5px]">R$</span>
@@ -33,11 +38,11 @@ export function NewAccountModal() {
           <Input
             type="text"
             name="name"
-            placeholder="Nome da Conta"
+            placeholder={isExpense ? 'Nome da Despesa' : 'Nome da Receita'}
           />
 
           <Select
-            placeholder="Tipo"
+            placeholder="Categoria"
             options={[
               {
                 value: 'INVESTIMENT',
@@ -54,7 +59,23 @@ export function NewAccountModal() {
             ]}
           />
 
-          <ColorsDropdownInput />
+          <Select
+            placeholder={isExpense ? 'Pagar com' : 'Receber com'}
+            options={[
+              {
+                value: 'INVESTIMENT',
+                label: 'Investimento'
+              },
+              {
+                value: 'CHECKING',
+                label: 'Conta Corrente'
+              },
+              {
+                value: 'CASH',
+                label: 'Dinheiro Físico'
+              }
+            ]}
+          />
 
           <Button type="submit" className="w-full mt-6" isLoading={isLoading}>
             Criar
