@@ -1,5 +1,5 @@
 import { Button } from "../../../../components/Button";
-import { ColorsDropdownInput } from "../../../../components/ColorsDropdownInput";
+import { DatePickerInput } from "../../../../components/DatePickerInput";
 import { Input } from "../../../../components/Input";
 import { InputCurrency } from "../../../../components/InputCurrency";
 import { Modal } from "../../../../components/Modal";
@@ -77,10 +77,13 @@ export function NewTransactionModal() {
             ]}
           />
 
-          <Button type="submit" className="w-full mt-6" isLoading={isLoading}>
-            Criar
-          </Button>
+          <DatePickerInput />
+
         </div>
+
+        <Button type="submit" className="w-full mt-6" isLoading={isLoading}>
+          Criar
+        </Button>
       </form>
     </Modal>
   );
