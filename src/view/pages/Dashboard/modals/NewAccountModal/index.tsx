@@ -11,6 +11,9 @@ export function NewAccountModal() {
     isNewAccountModalOpen,
     closeNewAccountModal,
     isLoading,
+    register,
+    errors,
+    handleSubmit,
   } = useNewAccountModalController();
 
   return (
@@ -19,25 +22,29 @@ export function NewAccountModal() {
       open={isNewAccountModalOpen}
       onClose={closeNewAccountModal}
     >
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
-          <span className="text-gray-600 text-xs tracking-[-0.5px]">Saldo</span>
+          <span className="text-gray-600 text-xs tracking-[-0.5px]">Saldo inicial</span>
 
           <div className="flex items-center gap-2">
             <span className="text-gray-600 text-lg tracking-[-0.5px]">R$</span>
-            <InputCurrency />
+            <InputCurrency
+              error={errors.initialBalance?.message}
+            />
           </div>
         </div>
 
         <div className="mt-10 flex flex-col gap-4">
           <Input
             type="text"
-            name="name"
             placeholder="Nome da Conta"
+            error={errors.name?.message}
+            {...register('name')}
           />
 
           <Select
             placeholder="Tipo"
+            error={errors.type?.message}
             options={[
               {
                 value: 'INVESTIMENT',
@@ -54,7 +61,10 @@ export function NewAccountModal() {
             ]}
           />
 
-          <ColorsDropdownInput />
+          <ColorsDropdownInput
+            error={errors.color?.message}
+            {...register('color')}
+          />
 
           <Button type="submit" className="w-full mt-6" isLoading={isLoading}>
             Criar
