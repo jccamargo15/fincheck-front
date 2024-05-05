@@ -4,15 +4,18 @@ import { cn } from '../../app/utils/cn';
 
 interface InputCurrencyProps {
   error?: string;
+  value?: string;
+  onChange?(value: string): void;
 }
 
-export function InputCurrency({ error }: InputCurrencyProps) {
+export function InputCurrency({ error, value, onChange }: InputCurrencyProps) {
   return (
     <div>
       <NumericFormat
         thousandSeparator="."
         decimalSeparator=","
-        defaultValue={0}
+        value={value}
+        onChange={(e) => onChange?.(e.target.value)}
         className={cn(
           'text-gray-800 text-[32px] font-bold tracking-[-1px] outline-none w-full',
           error && 'text-red-900'
