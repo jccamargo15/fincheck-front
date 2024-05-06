@@ -2,6 +2,9 @@ import { z } from "zod";
 import { useDashboard } from "../../components/DashboardContext/useDashboard";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import { bankAccountsService } from "../../../../../app/services/bankAccountsService";
+import { currencyStringToNumber } from "../../../../../app/utils/currencyStringToNunber";
 
 const schema = z.object({
   initialBalance: z.string().nonempty('Saldo inicial é obritagório'),
@@ -18,7 +21,6 @@ export function useNewAccountModalController() {
     closeNewAccountModal
   } = useDashboard();
 
-  const isLoading = false;
 
   const {
     register,
@@ -29,17 +31,30 @@ export function useNewAccountModalController() {
     resolver: zodResolver(schema),
   });
 
-  const handleSubmit = hookFormSubmit(async (data: FormData) => {
-    console.log(data);
+  const { isPending, mutateAsync } = useMutation({
+    mutationFn: bankAccountsService.create,
+  });
+
+  const handleSubmit = hookFormSubmit(async (data) => {
+    try {
+      await mutateAsync({
+        ...data,
+        initialBalance: currencyStringToNumber(data.initialBalance),
+      });
+      closeNewAccountModal();
+    } catch (error) {
+      console.error(error);
+    }
   });
 
   return {
     isNewAccountModalOpen,
     closeNewAccountModal,
-    isLoading,
+    isPending,
     register,
     errors,
     handleSubmit,
     control,
   }
 }
+

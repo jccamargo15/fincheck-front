@@ -11,7 +11,7 @@ export function NewAccountModal() {
   const {
     isNewAccountModalOpen,
     closeNewAccountModal,
-    isLoading,
+    isPending,
     register,
     errors,
     handleSubmit,
@@ -94,7 +94,7 @@ export function NewAccountModal() {
             )}
           />
 
-          <Button type="submit" className="w-full mt-6" isLoading={isLoading}>
+          <Button type="submit" className="w-full mt-6" isLoading={isPending}>
             Criar
           </Button>
         </div>
